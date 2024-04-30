@@ -10,7 +10,7 @@ Doing CRUD operation for many type requirment----
 
 --find data by country_name
 
---post data from the cliet side to the dataBase
+--get data from the client side and post to the dataBase Using post method
 
 --read the data from dataBase by app.get()
 
