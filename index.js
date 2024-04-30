@@ -30,22 +30,26 @@ async function run() {
     await client.connect();
     
     app.get('/places',async(req,res)=>{
-        const cursor=placesCollection.find()
+        const cursor=placesCollection.find().sort({average_cost:1});
         const result=await cursor.toArray()
         res.send(result)
     })
+
    app.get('/allCountry',async(req,res)=>{
     const cursor=countryCollection.find()
     const result=await cursor.toArray()
     res.send(result)
    })
 
+//GET COUNTRY BY COUNTRY NAME
    app.get('/allCountry/:name',async(req,res)=>{
     const name=req.params.name
     const query={country_Name:name}
     const result=await countryCollection.find(query).toArray()
     res.send(result)
    })
+
+   //get country by id
 app.get('/country/:id',async(req,res)=>{
   const id=req.params.id
   const query={_id:new ObjectId(id)}
@@ -53,6 +57,7 @@ app.get('/country/:id',async(req,res)=>{
   res.send(result)
 })
 
+//get places by id
     app.get('/places/:id',async(req,res)=>{
       const id=req.params.id
       const query={_id:new ObjectId(id)}
