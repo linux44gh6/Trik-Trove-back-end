@@ -6,8 +6,6 @@ require('dotenv').config()
 app.use(cors())
 app.use(express.json())
 
-console.log(process.env.USER_NAME);
-//connect mongodb
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.USER_NAME}:${process.env.PASS}@cluster0.pnsxsk9.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
@@ -27,10 +25,10 @@ async function run() {
     const database = client.db("touristPlace");
     const placesCollection = database.collection("places");
     const countryCollection=database.collection('CountryCollection')
-    await client.connect();
+    // await client.connect();
     
     app.get('/places',async(req,res)=>{
-        const cursor=placesCollection.find().sort({average_cost:1});
+        const cursor=placesCollection.find().sort({average_cost:-1});
         const result=await cursor.toArray()
         res.send(result)
     })
